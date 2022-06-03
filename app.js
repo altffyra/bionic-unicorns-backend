@@ -6,4 +6,27 @@
 
 const express = require('express');
 const app = express();
+const {} = require('./modules/nedb')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(7777, ()=>{
+console.log("Listening to orders")
+})
