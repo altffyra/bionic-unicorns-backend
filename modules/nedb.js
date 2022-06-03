@@ -21,4 +21,9 @@ function createaccount(credentials){
     return result
 }
 
-module.exports = {menuresult, checkaccount, createaccount}
+function loginaccount(credentials){
+    const result = userdatabase.find({$and: [{email: credentials.email} , {username: credentials.username}, {password: credentials.password}] })
+    return result
+}
+
+module.exports = {menuresult, checkaccount, createaccount, loginaccount}
