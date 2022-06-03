@@ -4,7 +4,7 @@ const orderdatabase = new nedb({filename: 'orderdatabase.db', autoload:true})
 const menudatabase = new nedb({filename: 'menudatabase.db', autoload:true})
 
 
-
+//MENU KLAR I MENUDATABASEN
 
 
 
