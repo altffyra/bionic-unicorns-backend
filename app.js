@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {menuresult} = require('./modules/nedb')
+const {menuresult, checkaccount, createaccount} = require('./modules/nedb')
 app.use(express.json())
 
 function authenticate(){
@@ -31,7 +31,21 @@ app.get('/api/order/:id', async (request, response)=> {
 
 // /api/account/signup	POST	Skapar ett användarkonto
 app.post('/api/account/signup', async (request, response)=> {
+    const credentials = request.body
+    const resObj = {}
+    if (credentials.hasOwnProperty('email') && credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password'))
+    {
+        const result = await checkaccount(credentials)
+        if (result.length < 1)
+        {
+            const result = createaccount(credentials)
+            resObj.message = "success"
+            resObj.account = result
+        } else {resObj.message = "Account already exists"}
 
+    }else 
+    {resObj.message = "No credentials BIFOGAT"}
+    response.json(resObj)
 })
 
 

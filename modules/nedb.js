@@ -11,7 +11,14 @@ const result = menudatabase.find({})
 return result
 }
 
+function checkaccount(credentials){
+    const result = userdatabase.find({ $or: [ {email: credentials.email}, {username: credentials.username} ] })
+    return result
+}
 
+function createaccount(credentials){
+    const result = userdatabase.insert({ email: credentials.email , username: credentials.username, password: credentials.password })
+    return result
+}
 
-
-module.exports = {menuresult}
+module.exports = {menuresult, checkaccount, createaccount}
