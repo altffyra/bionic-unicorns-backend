@@ -26,12 +26,13 @@ function loginaccount(credentials){
     return result
 }
 function findOrders(credentials){
-    const result = orderdatabase.find({id: credentials })
+    const result = orderdatabase.find({username: credentials })
     return result
-}
 
+}
+function createOrder(credentials){
     const result = orderdatabase.insert({username: credentials.username, order: credentials.id })
     return result
 }
 
-module.exports = {menuresult, checkaccount, createaccount, loginaccount, order}
+module.exports = {menuresult, checkaccount, createaccount, loginaccount, createOrder, findOrders}
