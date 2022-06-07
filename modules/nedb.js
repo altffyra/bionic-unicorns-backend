@@ -11,17 +11,17 @@ const result = menudatabase.find({})
 return result
 }
 
-function checkaccount(credentials){
+function checkAccount(credentials){
     const result = userdatabase.find({ $or: [ {email: credentials.email}, {username: credentials.username} ] })
     return result
 }
 
-function createaccount(credentials){
+function createAccount(credentials){
     const result = userdatabase.insert({ email: credentials.email , username: credentials.username, password: credentials.password })
     return result
 }
 
-function loginaccount(credentials){
+function loginAccount(credentials){
     const result = userdatabase.find({$and: [{username: credentials.username}, {password: credentials.password}] })
     return result
 }
@@ -30,9 +30,15 @@ function findOrders(credentials){
     return result
 
 }
+
+function compareOrder(credentials){
+    const result = orderdatabase.find({_id: credentials.id})
+    return result
+
+}
 function createOrder(credentials){
     const result = orderdatabase.insert({username: credentials.username, order: credentials.id })
     return result
 }
 
-module.exports = {menuresult, checkaccount, createaccount, loginaccount, createOrder, findOrders}
+module.exports = {menuresult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder}
