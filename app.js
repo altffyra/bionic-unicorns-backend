@@ -24,11 +24,9 @@ app.post('/api/order', async (request, response)=> {
 
     //IF GUEST
     const ETA = Math.floor(Math.random()*10) 
-    const orderTime = new Date().toLocaleTimeString();
     const orderResults = await createOrder(credentials);
-    const resObj = {order: orderResults, orderTime: orderTime}
+    const resObj = {order: orderResults, ETA: ETA}
     response.json(resObj)
-    
  
     // new Date().toLocaleTimeString()
 })

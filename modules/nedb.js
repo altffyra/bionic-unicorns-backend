@@ -37,7 +37,8 @@ function compareOrder(credentials){
 
 }
 function createOrder(credentials){
-    const result = orderdatabase.insert({username: credentials.username, order: credentials.id })
+    const orderTime = new Date().toLocaleTimeString();
+    const result = orderdatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime })
     return result
 }
 
