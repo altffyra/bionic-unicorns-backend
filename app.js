@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {menuresult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder} = require('./modules/nedb')
+const {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder} = require('./modules/nedb')
 const PORT = 7777
 app.use(express.json())
 
@@ -8,14 +8,6 @@ app.use(express.json())
 // /api/order	POST	Sparar en kaffebeställning för en användare och returnerar en ETA-tid och ordernummer 
 // (båda dessa kan slumpas) till frontend. Om ett användarnamn skickas med i beställningen ska ordern kopplas till 
 // detta användarnamn i databasen. Ifall inget användarnamn skickas med så ska beställningen sparas som gäst.
-
-
-// order: {andvändarnamn:  timestamp: ETA:(minuter)} , tidjustnu
-// if tidjustnu > eta then done:true
-
-
-const ETA = `${Math.floor(Math.random() * 20)} minutes`
-console.log(ETA)
 
 app.post('/api/order', async (request, response)=> {
 
@@ -38,7 +30,6 @@ app.post('/api/order', async (request, response)=> {
 app.get('/api/order/:id', async (request, response)=> {
         const id = request.params.id;
         const findOrder = await findOrders(id)
-        console.log(findOrder)
         for (let i = 0; i < findOrder.length; i++) {
             const singleOrder = findOrder[i];
             console.log(singleOrder)
@@ -52,7 +43,7 @@ function skitkompliceradjämförlsefunktion(compareID) {
     const rightnow = new Date().toLocaleTimeString()
     if (compareID.ETA > rightnow ) {
      compareID.done = "done"
-     return compareID
+     
     }
 
 // new Date().toLocaleTimeString()
@@ -95,7 +86,7 @@ function skitkompliceradjämförlsefunktion(compareID) {
 
 // /api/menu	GET	Returnerar en kaffemeny
 app.get('/api/menu', async (request, response)=> {
-    const menuResults = await menuresult();
+    const menuResults = await menuResult();
     const resObj = {menu: menuResults}
     response.json(resObj)
     })

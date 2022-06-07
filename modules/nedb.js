@@ -26,7 +26,7 @@ function loginAccount(credentials){
     return result
 }
 function findOrders(credentials){
-    const result = orderDatabase.find({id: credentials })
+    const result = orderDatabase.find({username: credentials })
     return result
 
 }
@@ -38,6 +38,9 @@ function compareOrder(credentials){
 }
 function createOrder(credentials){
     const orderTime = new Date().toLocaleTimeString();
+    const ETA = Math.floor(Math.random() * 20)
+
+
     const result = orderdatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime })
     return result
 }
