@@ -27,12 +27,16 @@ app.post('/api/order', async (request, response)=> {
     response.json(resObj)
 
 
-    // new Date().toLocaleTimeString())
+    // new Date().toLocaleTimeString()
 })
 
+
+// KLAR
 // /api/order/:id	GET	Returnerar orderhistorik för en specifik användare
 app.get('/api/order/:id', async (request, response)=> {
-
+        const id = request.params.id;
+        const findOrder = findOrders(id)
+        response.json(findOrder);
 })
 
 

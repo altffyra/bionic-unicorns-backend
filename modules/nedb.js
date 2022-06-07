@@ -25,8 +25,11 @@ function loginaccount(credentials){
     const result = userdatabase.find({$and: [{username: credentials.username}, {password: credentials.password}] })
     return result
 }
+function findOrders(credentials){
+    const result = orderdatabase.find({id: credentials })
+    return result
+}
 
-function order (credentials) {
     const result = orderdatabase.insert({username: credentials.username, order: credentials.id })
     return result
 }
