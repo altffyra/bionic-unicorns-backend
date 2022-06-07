@@ -12,13 +12,15 @@ app.use(express.json())
 app.post('/api/order', async (request, response)=> {
 
     const credentials = request.body
-
+    if (credentials.hasOwnProperty('username')) {
     //IF GUEST
     const ETA = Math.floor(Math.random()*10) 
     const orderResults = await createOrder(credentials);
     const resObj = {order: orderResults, ETA: ETA}
     response.json(resObj)
- 
+    } else {
+
+    }
     // 
 })
 
