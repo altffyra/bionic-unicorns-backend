@@ -28,10 +28,17 @@ function loginAccount(credentials){
 function findOrders(credentials){
     const result = orderDatabase.find({id: credentials })
     return result
+
 }
 
-//     const result = orderDatabase.insert({username: credentials.username, order: credentials.id })
-//     return result
-// }
+function compareOrder(credentials){
+    const result = orderDatabase.find({_id: credentials.id})
+    return result
 
-module.exports = {menuResult, checkAccount, createAccount, loginAccount, order}
+}
+function createOrder(credentials){
+    const result = orderDatabase.insert({username: credentials.username, order: credentials.id })
+    return result
+}
+
+module.exports = {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder}
