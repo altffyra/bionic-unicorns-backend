@@ -5,11 +5,13 @@ const PORT = 7777
 app.use(express.json())
 
 
+
 // /api/order	POST	Sparar en kaffebeställning för en användare och returnerar en ETA-tid och ordernummer 
 // (båda dessa kan slumpas) till frontend. Om ett användarnamn skickas med i beställningen ska ordern kopplas till 
 // detta användarnamn i databasen. Ifall inget användarnamn skickas med så ska beställningen sparas som gäst.
 
 app.post('/api/order', async (request, response)=> {
+/// måste ha massa ids som är kaffe, 
 
     const credentials = request.body
     if (credentials.hasOwnProperty('username')) {
@@ -19,7 +21,7 @@ app.post('/api/order', async (request, response)=> {
     const resObj = {order: orderResults}
     response.json(resObj)
     } else {
-        
+
     }
     // 
 })
@@ -48,11 +50,6 @@ function skitkompliceradjämförlsefunktion(singleOrder, tempArray) {
      singleOrder.done = "done"
      tempArray.push(singleOrder)
     }
-
-// new Date().toLocaleTimeString()
-//    if(!getOrder.hasOwnProperty("done")){
-//        felxesupdatefunktion(getOrder)
-
 
 }
 
