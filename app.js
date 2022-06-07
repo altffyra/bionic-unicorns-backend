@@ -14,9 +14,9 @@ app.post('/api/order', async (request, response)=> {
     const credentials = request.body
     if (credentials.hasOwnProperty('username')) {
     //IF GUEST
-    const ETA = Math.floor(Math.random()*10) 
+    
     const orderResults = await createOrder(credentials);
-    const resObj = {order: orderResults, ETA: ETA}
+    const resObj = {order: orderResults}
     response.json(resObj)
     } else {
 
@@ -30,22 +30,23 @@ app.post('/api/order', async (request, response)=> {
 
 // skicka med en jämförelse i returneringen om en är klar
 app.get('/api/order/:id', async (request, response)=> {
-        const id = request.params.id;
-        const findOrder = await findOrders(id)
+        const tempArray = [] 
+        const username = request.params.id;
+        const findOrder = await findOrders(username)
         for (let i = 0; i < findOrder.length; i++) {
             const singleOrder = findOrder[i];
-            console.log(singleOrder)
-            // skitkompliceradjämförlsefunktion(singleorder)
-
+            skitkompliceradjämförlsefunktion(singleOrder, tempArray)
         }
-        response.json(findOrder);
+        response.json(tempArray);
 })
 
-function skitkompliceradjämförlsefunktion(compareID) {
-    const rightnow = new Date().toLocaleTimeString()
-    if (compareID.ETA > rightnow ) {
-     compareID.done = "done"
-     
+function skitkompliceradjämförlsefunktion(singleOrder, tempArray) {
+    const rightNow = new Date().toLocaleTimeString()
+    
+    if (singleOrder.ETA > rightNow ) {
+        console.log("HOLY LOL")
+     singleOrder.done = "done"
+     tempArray.push(singleOrder)
     }
 
 // new Date().toLocaleTimeString()

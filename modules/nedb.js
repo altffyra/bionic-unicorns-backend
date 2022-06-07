@@ -38,10 +38,12 @@ function compareOrder(credentials){
 }
 function createOrder(credentials){
     const orderTime = new Date().toLocaleTimeString();
-    const ETA = Math.floor(Math.random() * 20)
+
+        const ETAnumber = Math.floor(Math.random() * 10)
+        const newETA = new Date(orderTime.getTime() + ETAnumber*60000)
 
 
-    const result = orderdatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime })
+    const result = orderdatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime, ETA: newETA })
     return result
 }
 
