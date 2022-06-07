@@ -22,8 +22,13 @@ function createaccount(credentials){
 }
 
 function loginaccount(credentials){
-    const result = userdatabase.find({$and: [{email: credentials.email} , {username: credentials.username}, {password: credentials.password}] })
+    const result = userdatabase.find({$and: [{username: credentials.username}, {password: credentials.password}] })
     return result
 }
 
-module.exports = {menuresult, checkaccount, createaccount, loginaccount}
+function order (credentials) {
+    const result = orderdatabase.insert({username: credentials.username, order: credentials.id })
+    return result
+}
+
+module.exports = {menuresult, checkaccount, createaccount, loginaccount, order}

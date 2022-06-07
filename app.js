@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const {menuresult, checkaccount, createaccount, loginaccount} = require('./modules/nedb')
+const {menuresult, checkaccount, createaccount, loginaccount, order} = require('./modules/nedb')
+const PORT = 7777
 app.use(express.json())
 
 function authenticate(){
@@ -10,8 +11,8 @@ function authenticate(){
 
 // /api/menu	GET	Returnerar en kaffemeny
 app.get('/api/menu', async (request, response)=> {
-const menuresults = await menuresult();
-const resObj = {menu: menuresults}
+const menuResults = await menuresult();
+const resObj = {menu: menuResults}
 response.json(resObj)
 })
 
@@ -19,6 +20,12 @@ response.json(resObj)
 // (båda dessa kan slumpas) till frontend. Om ett användarnamn skickas med i beställningen ska ordern kopplas till 
 // detta användarnamn i databasen. Ifall inget användarnamn skickas med så ska beställningen sparas som gäst.
 app.post('/api/order', async (request, response)=> {
+    const credentials = request.body
+    const orderTime = new Date().toLocaleTimeString();
+    const orderResults = await order(credentials);
+    const resObj = {order: orderResults, eta: orderTime}
+    response.json(resObj)
+
 
     // new Date().toLocaleTimeString())
 })
@@ -33,18 +40,18 @@ app.get('/api/order/:id', async (request, response)=> {
 app.post('/api/account/signup', async (request, response)=> {
     const credentials = request.body
     const resObj = {}
-    if (credentials.hasOwnProperty('email') && credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password'))
-    {
+    if (credentials.hasOwnProperty('email') && credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password')) {
         const result = await checkaccount(credentials)
-        if (result.length < 1)
-        {
+        if (result.length < 1) {
             const result = createaccount(credentials)
             resObj.message = "success"
             resObj.account = result
-        } else {resObj.message = "Account already exists"}
-
-    }else 
-    {resObj.message = "No credentials BIFOGAT"}
+        } else {
+            resObj.message = "Account already exists"
+        }
+    } else {
+        resObj.message = "No valid credentials " 
+    }
     response.json(resObj)
 })
 
@@ -53,17 +60,19 @@ app.post('/api/account/signup', async (request, response)=> {
 app.post('/api/account/login', async (request, response)=> {
     const credentials = request.body
     const resObj = {}
-    if (credentials.hasOwnProperty('email') && credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password'))
-    {
+    if (credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password')) {
         const result = await loginaccount(credentials)
         if (result.length > 0) {
             resObj.message = "account successfully logged in!"
-        }else  resObj.message = "Wrong email/username/password"
-    }else  {resObj.message = "No credentials BIFOGAT"}
+        } else  resObj.message = "Wrong username/password"
+    } else {
+        resObj.message = "No credentials BIFOGAT"
+    }
     response.json(resObj)
 })
 
 
-app.listen(7777, ()=>{
-console.log("Listening to orders")
+app.listen(PORT, ()=>{
+    console.log(`Server started at port: ${PORT}`)
+    console.log("Listening to orders")
 })
