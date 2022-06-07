@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {menuresult, checkaccount, createaccount, loginaccount} = require('./modules/nedb')
+const {menuresult, checkaccount, createaccount, loginaccount ,findOrders} = require('./modules/nedb')
 app.use(express.json())
 
 function authenticate(){
@@ -20,12 +20,16 @@ response.json(resObj)
 // detta användarnamn i databasen. Ifall inget användarnamn skickas med så ska beställningen sparas som gäst.
 app.post('/api/order', async (request, response)=> {
 
-    // new Date().toLocaleTimeString())
+    // new Date().toLocaleTimeString()
 })
 
+
+// KLAR
 // /api/order/:id	GET	Returnerar orderhistorik för en specifik användare
 app.get('/api/order/:id', async (request, response)=> {
-
+        const id = request.params.id;
+        const findOrder = findOrders(id)
+        response.json(findOrder);
 })
 
 

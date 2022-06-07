@@ -25,5 +25,10 @@ function loginaccount(credentials){
     const result = userdatabase.find({$and: [{email: credentials.email} , {username: credentials.username}, {password: credentials.password}] })
     return result
 }
+function findOrders(credentials){
+    const result = orderdatabase.find({id: credentials })
+    return result
+}
 
-module.exports = {menuresult, checkaccount, createaccount, loginaccount}
+
+module.exports = {menuresult, checkaccount, createaccount, loginaccount, findOrders}
