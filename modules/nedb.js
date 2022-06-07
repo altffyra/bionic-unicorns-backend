@@ -1,38 +1,38 @@
 const nedb =  require('nedb-promise')
-const userdatabase = new nedb({filename: 'userdatabase.db', autoload:true})
-const orderdatabase = new nedb({filename: 'orderdatabase.db', autoload:true})
-const menudatabase = new nedb({filename: 'menuedatabase.db', autoload:true})
+const userDatabase = new nedb({filename: 'userdatabase.db', autoload:true})
+const orderDatabase = new nedb({filename: 'orderdatabase.db', autoload:true})
+const menuDatabase = new nedb({filename: 'menuedatabase.db', autoload:true})
 
 
 //MENU KLAR I MENUDATABASEN
 
-function menuresult(){
-const result = menudatabase.find({})
+function menuResult(){
+const result = menuDatabase.find({})
 return result
 }
 
 function checkAccount(credentials){
-    const result = userdatabase.find({ $or: [ {email: credentials.email}, {username: credentials.username} ] })
+    const result = userDatabase.find({ $or: [ {email: credentials.email}, {username: credentials.username} ] })
     return result
 }
 
 function createAccount(credentials){
-    const result = userdatabase.insert({ email: credentials.email , username: credentials.username, password: credentials.password })
+    const result = userDatabase.insert({ email: credentials.email , username: credentials.username, password: credentials.password })
     return result
 }
 
 function loginAccount(credentials){
-    const result = userdatabase.find({$and: [{username: credentials.username}, {password: credentials.password}] })
+    const result = userDatabase.find({$and: [{username: credentials.username}, {password: credentials.password}] })
     return result
 }
 function findOrders(credentials){
-    const result = orderdatabase.find({username: credentials })
+    const result = orderDatabase.find({id: credentials })
     return result
 
 }
 
 function compareOrder(credentials){
-    const result = orderdatabase.find({_id: credentials.id})
+    const result = orderDatabase.find({_id: credentials.id})
     return result
 
 }
@@ -42,4 +42,4 @@ function createOrder(credentials){
     return result
 }
 
-module.exports = {menuresult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder}
+module.exports = {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder}

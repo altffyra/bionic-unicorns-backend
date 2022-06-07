@@ -13,10 +13,9 @@ app.use(express.json())
 // order: {andvändarnamn:  timestamp: ETA:(minuter)} , tidjustnu
 // if tidjustnu > eta then done:true
 
-//får man skicka tillbaks tid just nu och en tid ordern är lagd och jämförta i frontend för att göra timers etc
 
-
-
+const ETA = `${Math.floor(Math.random() * 20)} minutes`
+console.log(ETA)
 
 app.post('/api/order', async (request, response)=> {
 
@@ -28,7 +27,7 @@ app.post('/api/order', async (request, response)=> {
     const resObj = {order: orderResults, ETA: ETA}
     response.json(resObj)
  
-    // new Date().toLocaleTimeString()
+    // 
 })
 
 
@@ -39,13 +38,29 @@ app.post('/api/order', async (request, response)=> {
 app.get('/api/order/:id', async (request, response)=> {
         const id = request.params.id;
         const findOrder = await findOrders(id)
+        console.log(findOrder)
+        for (let i = 0; i < findOrder.length; i++) {
+            const singleOrder = findOrder[i];
+            console.log(singleOrder)
+            // skitkompliceradjämförlsefunktion(singleorder)
+
+        }
         response.json(findOrder);
 })
 
-// function skitkompliceradjämförlsefunktion() {
-//    const  compareOrder
+function skitkompliceradjämförlsefunktion(compareID) {
+    const rightnow = new Date().toLocaleTimeString()
+    if (compareID.ETA > rightnow ) {
+     compareID.done = "done"
+     return compareID
+    }
 
-// }
+// new Date().toLocaleTimeString()
+//    if(!getOrder.hasOwnProperty("done")){
+//        felxesupdatefunktion(getOrder)
+
+
+}
 
 
 
