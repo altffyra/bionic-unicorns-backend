@@ -42,7 +42,6 @@ function createOrder(credentials){
     const ETAnumber = Math.floor(Math.random() * 10)
     ETAminutes = new Date ( orderTimeTemp );
     ETAminutes.setMinutes ( orderTimeTemp.getMinutes() + ETAnumber );
-    console.log(ETAminutes)
 
     const result = orderDatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime, ETA: ETAminutes })
     return result

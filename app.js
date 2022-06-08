@@ -30,23 +30,23 @@ app.post('/api/order', async (request, response)=> {
 
 // skicka med en jämförelse i returneringen om en är klar
 app.get('/api/order/:id', async (request, response)=> {
-        const tempArray = [] 
+
         const username = request.params.id;
         const findOrder = await findOrders(username)
         for (let i = 0; i < findOrder.length; i++) {
             const singleOrder = findOrder[i];
-            skitkompliceradjämförlsefunktion(singleOrder, tempArray)
+            checkIfDone(singleOrder)
         }
-        response.json(tempArray);
+
+        response.json(findOrder);
 })
 
-function skitkompliceradjämförlsefunktion(singleOrder, tempArray) {
-    const rightNow = new Date().toLocaleTimeString()
+function checkIfDone(singleOrder, tempArray) {
+    const rightNow = new Date()
     
-    if (singleOrder.ETA > rightNow ) {
-        console.log("HOLY LOL")
+    if (singleOrder.ETA < rightNow ) {
      singleOrder.done = "done"
-     tempArray.push(singleOrder)
+
     }
 
 }
