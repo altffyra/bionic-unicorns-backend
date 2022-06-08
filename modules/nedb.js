@@ -4,8 +4,6 @@ const orderDatabase = new nedb({filename: 'orderdatabase.db', autoload:true})
 const menuDatabase = new nedb({filename: 'menuedatabase.db', autoload:true})
 
 
-//MENU KLAR I MENUDATABASEN
-
 function menuResult(){
 const result = menuDatabase.find({})
 return result
@@ -31,11 +29,7 @@ function findOrders(credentials){
 
 }
 
-function compareOrder(credentials){
-    const result = orderDatabase.find({_id: credentials.id})
-    return result
 
-}
 function createOrder(credentials){
     const orderTime = new Date().toLocaleTimeString();
     const orderTimeTemp = new Date()
@@ -44,8 +38,8 @@ function createOrder(credentials){
     ETAminutes.setMinutes ( orderTimeTemp.getMinutes() + ETAnumber );
     const toLocaleETA =ETAminutes.toLocaleTimeString()
 
-    const result = orderDatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime, ETA: toLocaleETA })
+    const result = orderDatabase.insert({username: credentials.username, order: credentials.cart, orderTime: orderTime, ETA: toLocaleETA })
     return result
 }
 
-module.exports = {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders, compareOrder}
+module.exports = {menuResult, checkAccount, createAccount, loginAccount, createOrder, findOrders}

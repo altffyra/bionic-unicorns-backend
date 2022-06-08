@@ -1,8 +1,1 @@
-{"username":"hej","orderTime":{"$$date":1654677758231},"ETA":{"$$date":1654678178231},"_id":"4OkeMDUVvb9UFXfT"}
-{"username":"hej","orderTime":{"$$date":1654676441362},"ETA":{"$$date":1654676501362},"_id":"5NWRu4hQmn0JcGIQ"}
-{"username":"hej","orderTime":{"$$date":1654677330744},"ETA":{"$$date":1654677450744},"_id":"FXLtuWUoc1rdcnuW"}
-{"username":"hej","orderTime":{"$$date":1654676522564},"ETA":{"$$date":1654677002564},"_id":"VtzDpi6TABqLiFzh"}
-{"username":"hej","orderTime":{"$$date":1654677329142},"ETA":{"$$date":1654677449142},"_id":"XgP7XZblzDLwP7gG"}
-{"username":"hej","orderTime":{"$$date":1654676360704},"ETA":{"$$date":1654676360704},"_id":"ituWEgTExlcoZzhN"}
-{"username":"hej","orderTime":{"$$date":1654676963685},"ETA":{"$$date":1654677263685},"_id":"uR9ESX2jCIZKcddI"}
-{"username":"hej","orderTime":"10:51:11","ETA":"11:00:11","_id":"zq2lgTjZhu6WruVG"}
+{"username":"hej","order":[{"id":1,"title":"Bryggkaffe","desc":"Bryggd på månadens bönor.","price":39,"_id":"TcWceVJWyeUmXFHB"},{"id":6,"title":"Cortado","desc":"Bryggd på månadens bönor.","price":39,"_id":"hgiP4Tff2klZgk3Y"}],"orderTime":"11:52:38","ETA":"11:58:38","_id":"eSUjyDCkS8qmWQOB"}
