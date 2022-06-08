@@ -4,8 +4,6 @@ const {menuResult, checkAccount, createAccount, loginAccount, createOrder, findO
 const PORT = 7777
 app.use(express.json())
 
-
-
 // /api/order	POST	Sparar en kaffebeställning för en användare och returnerar en ETA-tid och ordernummer 
 // (båda dessa kan slumpas) till frontend. Om ett användarnamn skickas med i beställningen ska ordern kopplas till 
 // detta användarnamn i databasen. Ifall inget användarnamn skickas med så ska beställningen sparas som gäst.

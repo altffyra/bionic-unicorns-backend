@@ -38,13 +38,13 @@ function compareOrder(credentials){
 }
 function createOrder(credentials){
     const orderTime = new Date();
-
+    const orderTimeTemp = new Date();
     const ETAnumber = Math.floor(Math.random() * 10)
-    ETAminutes = new Date ( orderTime );
-    ETAminutes.setMinutes ( orderTime.getMinutes() + parseInt(ETAnumber) );
+    ETAminutes = new Date ( orderTimeTemp );
+    ETAminutes.setMinutes ( orderTimeTemp.getMinutes() + ETAnumber );
+    console.log(ETAminutes)
 
-
-    const result = orderdatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime, ETA: ETAminutes })
+    const result = orderDatabase.insert({username: credentials.username, order: credentials.id, orderTime: orderTime, ETA: ETAminutes })
     return result
 }
 
