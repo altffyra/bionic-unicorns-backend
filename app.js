@@ -61,9 +61,9 @@ app.get('/api/order/:id', async (request, response)=> {
 })
 
 function checkIfDone(singleOrder) {
-    const rightNow = new Date().toLocaleString()
+    const rightNow = new Date().toLocaleTimeString()
     singleOrder.totalPrice = 0;
-    if (singleOrder.ETA > rightNow ) {
+    if (singleOrder.ETA < rightNow ) {
      singleOrder.done = "done";
     }
     const singleOrderCart = singleOrder.order;
